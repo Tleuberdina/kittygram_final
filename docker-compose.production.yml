@@ -1,0 +1,33 @@
+volumes:
+  pg_data_production:
+  static_volume:
+  media_volume:
+
+services:
+  db:
+    image: postgres:13.10
+    env_file: .env
+    volumes:
+      - pg_data_production:/var/lib/postgresql/data
+  backend:
+    image: yuliya2006/kittygram_backend # Качаем с Docker Hub
+    env_file: .env
+    volumes:
+      - static_volume:/backend_static
+      - media_volume:/app/media
+  frontend:
+    image: yuliya2006/kittygram_frontend  # Качаем с Docker Hub
+    env_file: .env
+    command: cp -r /app/build/. /frontend_static/
+    volumes:
+      - static_volume:/frontend_static
+  gateway:
+    image: yuliya2006/kittygram_gateway  # Качаем с Docker Hub
+    env_file: .env
+    depends_on:
+      - backend
+    volumes:
+      - static_volume:/static/
+      - media_volume:/media/
+    ports:
+      - 9000:80
