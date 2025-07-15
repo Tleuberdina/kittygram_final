@@ -6,12 +6,10 @@
 Установленный Docker и Docker Compose
 
 Шаги развертывания
-Клонируйте репозиторий: git clone git@github.com:Tleuberdina/foodgram.git cd foodgram
-
+Клонируйте репозиторий: git clone git@github.com:Tleuberdina/kittygram_final.git
+cd foodgram
 Постройте и запустите контейнеры: docker-compose up -d --build
-
 Выполните миграции: docker-compose exec web python manage.py migrate
-
 Откройте проект в браузере по адресу: http://localhost:8000/
 
 ###Технологии:
